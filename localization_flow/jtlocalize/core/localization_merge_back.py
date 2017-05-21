@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-from localization_utils import *
+from .localization_utils import *
 import argparse
 
 

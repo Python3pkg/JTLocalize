@@ -2,9 +2,7 @@ from abc import abstractmethod, ABCMeta
 import argparse
 
 
-class LocalizationCommandLineOperation(object):
-
-    __metaclass__ = ABCMeta
+class LocalizationCommandLineOperation(object, metaclass=ABCMeta):
 
     @abstractmethod
     def name(self):

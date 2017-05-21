@@ -6,7 +6,7 @@ import re
 import operator
 import logging
 
-from localization_objects import *
+from .localization_objects import *
 
 # Regexp to parse and inspect strings in format JTL('Key Name', 'Key Comment')
 JTL_REGEX = r"""JTL\(\\?['"](.+?)\\?['"],\s*\\?['"](.+?)\\?['"]\)"""
@@ -57,8 +57,8 @@ def write_file_elements_to_strings_file(file_path, file_elements):
     """
     f = open_strings_file(file_path, "w")
     for element in file_elements:
-        f.write(unicode(element))
-        f.write(u"\n")
+        f.write(str(element))
+        f.write("\n")
 
     f.close()
 
@@ -146,7 +146,7 @@ def extract_header_comment_key_value_tuples_from_file(file_descriptor):
     for header_comment, _ignored, raw_comments, key, value in findall_result:
         comments = re.findall("/\* (.*?) \*/", raw_comments)
         if len(comments) == 0:
-            comments = [u""]
+            comments = [""]
         returned_list.append((header_comment, comments, key, value))
 
     return returned_list
@@ -193,8 +193,8 @@ def extract_string_pairs_in_directory(directory_path, extract_func, filter_func)
                 try:
                     extract_func(result, file_path)
                 except Exception as e:
-                    print "Error in file " + file_name
-                    print e
+                    print("Error in file " + file_name)
+                    print(e)
     return result
 
 
@@ -207,8 +207,8 @@ def write_entry_to_file(file_descriptor, entry_comment, entry_key):
         entry_key (str): The entry's key.
     """
     escaped_key = re.sub(r'([^\\])"', '\\1\\"', entry_key)
-    file_descriptor.write(u'/* %s */\n' % entry_comment)
-    file_descriptor.write(u'"%s" = "%s";\n' % (escaped_key, escaped_key))
+    file_descriptor.write('/* %s */\n' % entry_comment)
+    file_descriptor.write('"%s" = "%s";\n' % (escaped_key, escaped_key))
 
 
 def write_section_header_to_file(file_descriptor, section_name):
@@ -232,8 +232,8 @@ def append_dictionary_to_file(localization_key_to_comment, file_path, section_na
     """
     output_file = open_strings_file(file_path, "a")
     write_section_header_to_file(output_file, section_name)
-    for entry_key, entry_comment in sorted(localization_key_to_comment.iteritems(), key=operator.itemgetter(1)):
-        output_file.write(u'\n')
+    for entry_key, entry_comment in sorted(iter(localization_key_to_comment.items()), key=operator.itemgetter(1)):
+        output_file.write('\n')
         write_entry_to_file(output_file, entry_comment, entry_key)
     output_file.close()
 
@@ -247,9 +247,9 @@ def write_dict_to_new_file(file_name, localization_key_to_comment):
 
     """
     output_file_descriptor = open_strings_file(file_name, "w")
-    for entry_key, entry_comment in sorted(localization_key_to_comment.iteritems(), key=operator.itemgetter(1)):
+    for entry_key, entry_comment in sorted(iter(localization_key_to_comment.items()), key=operator.itemgetter(1)):
         write_entry_to_file(output_file_descriptor, entry_comment, entry_key)
-        output_file_descriptor.write(u'\n')
+        output_file_descriptor.write('\n')
     output_file_descriptor.close()
 
 

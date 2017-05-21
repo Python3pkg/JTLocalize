@@ -3,7 +3,7 @@
 
 import argparse
 
-from core.localization_utils import *
+from .core.localization_utils import *
 from jtlocalize.core.localization_commandline_operation import LocalizationCommandLineOperation
 
 
@@ -30,7 +30,7 @@ class WrapReplacement(Replacement):
         self.wrapping_prefix = wrapping_prefix.decode("utf8")
 
     def replace_value(self, value):
-        return u"%s(%s)" % (self.wrapping_prefix, value)
+        return "%s(%s)" % (self.wrapping_prefix, value)
 
 
 def replace_english_values(filename, replacement):
@@ -61,7 +61,7 @@ class MockTranslateOperation(LocalizationCommandLineOperation):
 
         localization_option_group = parser.add_mutually_exclusive_group(required=True)
 
-        localization_option_group.add_argument("--preset", choices=PRESET_REPLACEMENTS.keys(),
+        localization_option_group.add_argument("--preset", choices=list(PRESET_REPLACEMENTS.keys()),
                                                help="Choose a preset type of mock translation.")
 
         localization_option_group.add_argument("--static", help="Choose a static replacement of your own.")

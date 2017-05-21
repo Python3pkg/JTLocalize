@@ -4,7 +4,7 @@ import argparse
 from xml.dom import minidom
 from xml.sax.saxutils import unescape
 
-from localization_utils import *
+from .localization_utils import *
 
 # The prefix to identify a comment for an internationalized comment.
 JT_INTERNATIONALIZED_COMMENT_PREFIX = 'jtl_'
@@ -290,7 +290,7 @@ def extract_string_pairs_in_ib_file(file_path, special_ui_components_prefix):
             results = [(None, os.path.basename(file_path))] + results
         return results
 
-    except Exception, e:
+    except Exception as e:
         logging.warn("ERROR: Error processing %s (%s: %s)", file_path, type(e), str(e))
         return []
 

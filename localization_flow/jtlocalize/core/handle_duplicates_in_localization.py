@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-from localization_utils import *
+from .localization_utils import *
 import argparse
 
 
@@ -57,8 +57,8 @@ def handle_duplications(file_path):
     f.seek(0)
 
     for element in file_elements:
-        f.write(unicode(element))
-        f.write(u"\n")
+        f.write(str(element))
+        f.write("\n")
 
     f.truncate()
     f.close()

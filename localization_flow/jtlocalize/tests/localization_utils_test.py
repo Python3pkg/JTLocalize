@@ -6,7 +6,7 @@ from jtlocalize.core.localization_utils import *
 
 TMP_FILE_PATH = "/tmp/Localizable.tmp.strings"
 
-EXAMPLE_FILE_CONTENT = u"""
+EXAMPLE_FILE_CONTENT = """
 /**
  * Comment 1
  */

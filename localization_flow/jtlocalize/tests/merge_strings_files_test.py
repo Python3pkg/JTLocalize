@@ -17,7 +17,7 @@ class MergeLocalizableTest(unittest.TestCase):
     """
 
     def setUp(self):
-        print "Starting test.."
+        print("Starting test..")
 
     def tearDown(self):
         os.remove(MERGED_FILE_PATH)

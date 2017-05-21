@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 import argparse
-from localization_utils import *
+from .localization_utils import *
 
 
 def parse_args():

@@ -131,7 +131,7 @@ def remove_empty_comments_from_file(file_path):
     filtered_file = open_strings_file(filtered_path, "w")
     for line in orig_file.readlines():
         if NO_COMMENT_PROVIDED_STRING in line:
-            processed_line = u"/* */\n"
+            processed_line = "/* */\n"
         else:
             processed_line = line
 

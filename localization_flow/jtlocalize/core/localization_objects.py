@@ -16,7 +16,7 @@ class Comment(object):
 
     def __unicode__(self):
         """ String description of the comment, to be added to the file. """
-        return u"%s\n" % self.comment.strip()
+        return "%s\n" % self.comment.strip()
 
 
 class LocalizationEntry(object):
@@ -40,8 +40,8 @@ class LocalizationEntry(object):
 
     def __unicode__(self):
         """ String description of the entry, to be added to the file. """
-        comments_str = u"\n".join([u"/* %s */" % comment for comment in self.comments])
-        return u'%s\n"%s" = "%s";\n' % (comments_str, self.key, self.value)
+        comments_str = "\n".join(["/* %s */" % comment for comment in self.comments])
+        return '%s\n"%s" = "%s";\n' % (comments_str, self.key, self.value)
 
     def add_comments(self, comments):
         """ Add comments to the localization entry

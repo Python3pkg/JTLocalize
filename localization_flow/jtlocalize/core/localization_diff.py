@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-from localization_utils import *
+from .localization_utils import *
 import argparse
 
 VALUE_PLACEHOLDER = "XXX"
@@ -49,12 +49,12 @@ def localization_diff(localizable_file, translated_file, excluded_strings_file, 
         excluded_file_dictionary = {}
 
     # The reason we keep a list of the keys, and not just pop is because values can repeat themselves.
-    translated_list = old_translated_file_dictionary.keys()
+    translated_list = list(old_translated_file_dictionary.keys())
     output_dictionary = {}
     output_file_elements = []
     f = open_strings_file(localizable_file, "r")
 
-    output_file_elements.append(Comment(u"""
+    output_file_elements.append(Comment("""
 /**
  * This file contains all the strings that were extracted from our app and that need to be translated.
  * Each entry may or may not have a comment explaining context, and a "key" = "%s" equation.
@@ -70,14 +70,14 @@ def localization_diff(localizable_file, translated_file, excluded_strings_file, 
         elif value in output_dictionary:
             output_dictionary[value].add_comments(comments)
             output_file_elements.append(Comment(
-                u"/* There was a value '%s' here but it was a duplicate of an older value and removed. */\n" % value))
+                "/* There was a value '%s' here but it was a duplicate of an older value and removed. */\n" % value))
         else:
             loc_obj = LocalizationEntry(comments, value, VALUE_PLACEHOLDER)
             output_dictionary[value] = loc_obj
             output_file_elements.append(loc_obj)
 
-    for key, removed_trans in old_translated_file_dictionary.items():
-        output_file_elements.append(Comment(u"""
+    for key, removed_trans in list(old_translated_file_dictionary.items()):
+        output_file_elements.append(Comment("""
 /*
  * Entry removed from previous translation file:
  * %s

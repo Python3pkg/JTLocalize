@@ -1,5 +1,5 @@
 import argparse
-from core.localization_utils import extract_header_comment_key_value_tuples_from_file, open_strings_file
+from .core.localization_utils import extract_header_comment_key_value_tuples_from_file, open_strings_file
 from jtlocalize.core.localization_commandline_operation import LocalizationCommandLineOperation
 
 __author__ = 'lwager'
@@ -17,7 +17,7 @@ class WordCountOperation(LocalizationCommandLineOperation):
         parser.add_argument("localizable_file", help="The file that requires translation.")
 
     def run(self, parsed_args):
-        print word_count(parsed_args.localizable_file)
+        print(word_count(parsed_args.localizable_file))
 
 
 def word_count(f_name):

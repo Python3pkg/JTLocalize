@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-from localization_utils import *
+from .localization_utils import *
 import sys
 import argparse
 import re
@@ -51,8 +51,8 @@ def add_genstrings_comments_to_file(localization_file, genstrings_err):
 
             loc_key = LocalizationEntry(comments, key, key)
 
-            loc_file.write(unicode(loc_key))
-            loc_file.write(u"\n")
+            loc_file.write(str(loc_key))
+            loc_file.write("\n")
 
     loc_file.close()
 
